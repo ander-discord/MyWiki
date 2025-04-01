@@ -75,11 +75,17 @@ function cleanWikipediaHTML(html) {
     tempDiv.querySelectorAll('.citation').forEach(cite => {
         cite.innerHTML = `<sup>[<a href="${cite.querySelector('a')?.href || '#'}" target="_blank">source</a>]</sup>`;
     });
-    
+
     tempDiv.querySelectorAll('a').forEach(link => {
-        if (link.href.includes('/wiki/')) {
-            console.warn(link.href);
+        if (link.href.includes('File:')) {
             let wikiPath = new URL(link.href).pathname.split('/').pop();
+            console.warn(`File: ${wikiPath}`);
+            link.href = `?simage=${decodeURIComponent(wikiPath.replace(/_/g, ' '))}`;
+        }
+
+        if (link.href.includes('/wiki/')) {
+            let wikiPath = new URL(link.href).pathname.split('/').pop();
+            console.warn(`Page: ${wikiPath}`);
             link.href = `?q=${decodeURIComponent(wikiPath.replace(/_/g, ' '))}`;
         }
         link.setAttribute('target', '_blank');
@@ -146,10 +152,16 @@ async function searchWikipedia() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
-    const searchQuery = urlParams.get('q');
+    const Query = urlParams.get('q');
+    const Image = urlParams.get('simage');
     
-    if (searchQuery) {
+    if (Query) {
         document.getElementById('searchInput').value = searchQuery;
         fetchWikipediaPageContent(searchQuery);
+    }
+
+    if (Image) {
+        document.getElementById('searchInput').value = Image;
+        displaySingleImage(Image);
     }
 })
