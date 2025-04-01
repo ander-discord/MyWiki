@@ -2,8 +2,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f8f9fa;
-    color: #212529;
+    background-color: #101010;
+    color: #101010;
     line-height: 1.6;
     text-align: center;
 }
@@ -12,16 +12,30 @@ body {
     max-width: 800px;
     margin: 0 auto 30px;
     padding: 20px;
-    background: white;
+    background: #151515;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
+
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
 
 input {
     width: 70%;
     padding: 12px;
     margin: 10px;
-    border: 2px solid #dee2e6;
+    border: 2px solid white;
     border-radius: 6px;
     font-size: 16px;
     transition: all 0.3s ease;
@@ -57,7 +71,7 @@ button:hover {
 }
 
 .article-content {
-    background: white;
+    background: #202020;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -68,12 +82,13 @@ button:hover {
     color: #1971c2;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid #dee2e6;
 }
 
 .wiki-text {
     line-height: 1.8;
     font-size: 16px;
+    color: whitesmoke;
 }
 
 .wiki-text p {
@@ -82,12 +97,12 @@ button:hover {
 
 .wiki-text strong {
     font-weight: 600;
-    color: #212529;
+    color: white;
 }
 
 .wiki-text em {
     font-style: italic;
-    color: #495057;
+    color: #f0f0f0;
 }
 
 .wiki-text a {
@@ -141,21 +156,21 @@ button:hover {
 .image-caption {
     padding: 12px;
     font-size: 14px;
-    color: #495057;
+    color: #f8f9fa;
     text-align: center;
 }
 
 .section-title {
-    color: #343a40;
+    color: #f8f9fa;
     margin: 30px 0 15px;
     padding-bottom: 8px;
     border-bottom: 1px solid #e9ecef;
 }
 
 .error-message {
-    color: #e03131;
+    color: #fff5f5;
     padding: 15px;
-    background: #fff5f5;
+    background: #e23636;
     border-radius: 6px;
     margin: 20px 0;
 }
@@ -163,7 +178,7 @@ button:hover {
 .loading {
     text-align: center;
     padding: 20px;
-    color: #495057;
+    color: #d3dede;
 }
 
 @media (max-width: 768px) {
