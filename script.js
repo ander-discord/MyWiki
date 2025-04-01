@@ -1,6 +1,6 @@
 async function fetchWikipediaPageContent(title) {
     const url = `https://en.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(title)}&prop=text|images&format=json&origin=*`;
-    document.getElementById('results').innerHTML = '<div class="loading">Loading content...</div>';
+    document.getElementById('results').innerHTML = '<div class="loading">Loading...</div>';
 
     try {
         const response = await fetch(url);
@@ -57,7 +57,6 @@ function cleanWikipediaHTML(html) {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;
     
-    // Remove unwanted elements
     const elementsToRemove = [
         '.hatnote', 
         '.metadata', 
@@ -78,8 +77,10 @@ function cleanWikipediaHTML(html) {
     });
     
     tempDiv.querySelectorAll('a').forEach(link => {
-        if (link.href.startsWith('/wiki/')) {
-            link.href = `https://en.wikipedia.org${link.getAttribute('href')}`;
+        if (link.href.includes('/wiki/')) {
+            console.warn(link.href);
+            let wikiPath = new URL(link.href).pathname.split('/').pop();
+            link.href = `?q=${decodeURIComponent(wikiPath.replace(/_/g, ' '))}`;
         }
         link.setAttribute('target', '_blank');
         link.setAttribute('rel', 'noopener noreferrer');
@@ -142,3 +143,13 @@ async function searchWikipedia() {
         await fetchWikipediaPageContent(query);
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('q');
+    
+    if (searchQuery) {
+        document.getElementById('searchInput').value = searchQuery;
+        fetchWikipediaPageContent(searchQuery);
+    }
+})
