@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const Query = urlParams.get('q');
     const Image = urlParams.get('simage');
-    const rickroll = urlParams.get('topserect');
+    const rickroll = urlParams.get('topsecret');
     
     if (Query) {
         document.getElementById('searchInput').value = Query;
