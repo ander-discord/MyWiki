@@ -148,9 +148,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const Query = urlParams.get('q');
     const Image = urlParams.get('simage');
+    const rickroll = urlParams.get('topserect');
     
     if (Query) {
         document.getElementById('searchInput').value = Query;
         fetchWikipediaPageContent(Query);
     }
+
+    if (rickroll !== null) {
+        var button = document.createElement("button");
+        button.innerText = "Show";
+        button.style.position = "fixed";
+        button.style.top = "50%";
+        button.style.left = "50%";
+        button.style.transform = "translate(-50%, -50%)";
+        button.style.padding = "10px 20px";
+        button.style.fontSize = "16px";
+        button.style.cursor = "pointer";
+        document.body.appendChild(button);
+    
+        var video = document.createElement("video");
+        video.src = "shh.mp4";
+        video.style.display = "none"; 
+        video.style.position = "fixed";
+        video.style.top = "0";
+        video.style.left = "0";
+        video.style.right = "0";
+        video.style.bottom = "0";
+        video.style.width = "100%";
+        video.style.height = "auto";
+        video.loop = true;
+        video.controls = false;
+        document.body.appendChild(video);
+    
+        button.addEventListener("click", function () {
+            video.style.display = "block";
+            video.play();
+            button.remove();
+        });
+    }       
 })
