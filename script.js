@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const Image = urlParams.get('simage');
     
     if (Query) {
-        document.getElementById('searchInput').value = searchQuery;
-        fetchWikipediaPageContent(searchQuery);
+        document.getElementById('searchInput').value = Query;
+        fetchWikipediaPageContent(Query);
     }
 })
