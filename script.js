@@ -77,12 +77,6 @@ function cleanWikipediaHTML(html) {
     });
 
     tempDiv.querySelectorAll('a').forEach(link => {
-        if (link.href.includes('File:')) {
-            let wikiPath = new URL(link.href).pathname.split('/').pop();
-            console.warn(`File: ${wikiPath}`);
-            link.href = `?simage=${decodeURIComponent(wikiPath.replace(/_/g, ' '))}`;
-        }
-
         if (link.href.includes('/wiki/')) {
             let wikiPath = new URL(link.href).pathname.split('/').pop();
             console.warn(`Page: ${wikiPath}`);
@@ -158,10 +152,5 @@ document.addEventListener('DOMContentLoaded', function() {
     if (Query) {
         document.getElementById('searchInput').value = searchQuery;
         fetchWikipediaPageContent(searchQuery);
-    }
-
-    if (Image) {
-        document.getElementById('searchInput').value = Image;
-        displaySingleImage(Image);
     }
 })
